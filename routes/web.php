@@ -22,7 +22,8 @@ Route::middleware([
     })->name('admin');
     Route::get('/admin_dashboard', [AdminController::class, 'admin'])->name('admin');
     Route::get('/form', [AdminController::class, 'form'])->name('form');
-    Route::get('/table', [AdminController::class, 'table'])->name('table');
+    Route::post('/add_users',[AdminController::class, 'add_user'])->name('add_user');
+    Route::get('/user_detail', [AdminController::class, 'user_detail'])->name('user_detail');
 
 
 });

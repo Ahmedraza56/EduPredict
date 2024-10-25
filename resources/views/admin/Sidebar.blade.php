@@ -18,7 +18,7 @@
 
                   </li>
                   <li>
-                      <a href="{{ route('table') }}" aria-expanded="false">
+                      <a href="{{ route('user_detail') }}" aria-expanded="false">
                           <i class="icon icon-layout-25"></i>
                           <span class="nav-text">Table</span>
                       </a>
