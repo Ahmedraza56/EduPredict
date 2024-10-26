@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 22, 2024 at 01:29 PM
+-- Generation Time: Oct 26, 2024 at 10:37 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -38,8 +38,8 @@ CREATE TABLE `cache` (
 --
 
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('c525a5357e97fef8d3db25841c86da1a', 'i:1;', 1729594134),
-('c525a5357e97fef8d3db25841c86da1a:timer', 'i:1729594134;', 1729594134);
+('c525a5357e97fef8d3db25841c86da1a', 'i:1;', 1729860812),
+('c525a5357e97fef8d3db25841c86da1a:timer', 'i:1729860812;', 1729860812);
 
 -- --------------------------------------------------------
 
@@ -121,11 +121,11 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '0001_01_01_000000_create_users_table', 1),
-(2, '0001_01_01_000001_create_cache_table', 1),
-(3, '0001_01_01_000002_create_jobs_table', 1),
-(4, '2024_10_21_074656_add_two_factor_columns_to_users_table', 1),
-(5, '2024_10_21_074850_create_personal_access_tokens_table', 1);
+(11, '0001_01_01_000000_create_users_table', 1),
+(12, '0001_01_01_000001_create_cache_table', 1),
+(13, '0001_01_01_000002_create_jobs_table', 1),
+(14, '2024_10_21_074656_add_two_factor_columns_to_users_table', 1),
+(15, '2024_10_21_074850_create_personal_access_tokens_table', 1);
 
 -- --------------------------------------------------------
 
@@ -178,7 +178,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('HLNfe99gaKZzvB96rS7X4VjjGVcKlTRHKUV08M2C', NULL, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiemIzcTBTQkNxMnZaT1BLSjMzWnVaUGpqeE1nenVKYTE3UzRRTDN5SyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6MzoidXJsIjthOjE6e3M6ODoiaW50ZW5kZWQiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbl9kYXNoYm9hcmQiO319', 1729596357);
+('b9TZXB6kZQPYdMlb2nBP5Al7OAvHxrbZoLaERiZG', 1, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiM09NMEVxRDZ1eTZkSDYzQ3J3d0ZKS2tjcFRMclQzN0p3TXRDV3ljbCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbl9kYXNoYm9hcmQiO31zOjM6InVybCI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMiRreUg3MUQubjZGLmROWXA2ZnJrLnpPcmh2YnBPR04zNDkuOVFFUDRuMnYwdlVhN1U1eDZjLiI7fQ==', 1729860752);
 
 -- --------------------------------------------------------
 
@@ -198,7 +198,7 @@ CREATE TABLE `users` (
   `remember_token` varchar(100) DEFAULT NULL,
   `current_team_id` bigint(20) UNSIGNED DEFAULT NULL,
   `profile_photo_path` varchar(2048) DEFAULT NULL,
-  `role` enum('admin','teacher','student') NOT NULL DEFAULT 'student',
+  `role` enum('admin','teacher','student','analyst') NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -208,7 +208,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `current_team_id`, `profile_photo_path`, `role`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@gmail.com', NULL, '$2y$12$cQJ.CNNrXVrSHBVB7hlW7e0KHX2haNfwfuaQco3Qpi5cOAMPz2Qtu', NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '2024-10-21 06:16:40', '2024-10-21 06:16:40');
+(1, 'admin', 'admin@gmail.com', NULL, '$2y$12$kyH71D.n6F.dNYp6frk.zOrhvbpOGN349.9QEP4n2v0vUa7U5x6c.', NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '2024-10-25 06:11:27', '2024-10-25 06:11:27'),
+(3, 'Irham', 'Irham@gmail.com', NULL, '$2y$12$LffZ1re1MzaEFKdr4J3xkOKo/xS6PlcYCwqZwtZp1KF2cq7rcMS06', NULL, NULL, NULL, NULL, NULL, NULL, 'analyst', '2024-10-25 06:12:31', '2024-10-25 06:12:31'),
+(4, 'Mufutau Dennis', 'tulijojuxi@mailinator.com', NULL, '$2y$12$I3w3GZ0kJOUKJpXgbgnRte5G7OI9VxJG6J5hEBJd2XGkaw.gW/sNq', NULL, NULL, NULL, NULL, NULL, NULL, 'student', '2024-10-25 06:34:02', '2024-10-25 06:34:02');
 
 --
 -- Indexes for dumped tables
@@ -301,7 +303,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -313,7 +315,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
